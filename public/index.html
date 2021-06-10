@@ -1,0 +1,61 @@
+<html>
+<head>
+	<script type="text/javascript" src="watermark.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body onload="init()">
+<div id="main" style="">
+		<div id="layoutContainer" style="position:absolute;background:black;margin-left:10%;margin-right:10%;top:2%;width:80%;height:80%">
+			
+		</div>
+    <div id="controls" style="position:absolute;background: grey;margin-left: 10%;margin-right: 10%;top:82%;width:80%;height:53px">
+      <div style="margin-left:45%;margin-right:50%;width: 120px;position: absolute;margin-top:2px">
+        <img id="micon" src="assets/mic-on.png" style="width:48px;height:48px;margin-right:2px" onclick="muteUnmuteMic()"/>
+        <img id="micoff" src="assets/mic-off.png" style="width:48px;height:48px;display: none;margin-right:2px" onclick="muteUnmuteMic()"/>
+        <img id="camon" src="assets/cam-on.png" style="width:48px;height:48px" onclick="muteUnmuteCam()" />
+        <img id="camoff" src="assets/cam-off.png" style="width:48px;height:48px;display: none;" onclick="muteUnmuteCam()"/>
+      </div>
+      <div style="right: 30%;width: 100px;position: absolute;margin-top:10px">
+        <div class="select">
+          <select name="slct" id="mode" onchange="changeFilter()">
+            <option value="MODE_LOGO" selected>LOGO</option>
+            <option value="MODE_COPYRIGHT">Copyright</option>
+            <option value="MODE_TIMESTAMP">Timestamp</option> 
+          </select>
+        </div>
+      </div>
+      <div style="right: 80%;width: 100px;position: absolute;margin-top:10px">
+        <div class="select">
+          <select name="camera" id="camera" onchange="changeCamera()">
+            
+          </select>
+        </div>
+      </div>
+      <div style="right: 10%;width: 100px;position: absolute;margin-top:10px">
+        <div id="bluramtdiv">
+          <input type="range" id="opacity" name="opacity" min="1" max="10" value="2" onchange="changeOpacity()">
+          <label for="volume">Opacity</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+   var layoutContainer = document.getElementById("layoutContainer");
+   var layout = undefined;
+   $.getScript("https://static.opentok.com/v2/js/opentok.min.js", (data, textStatus, jqxhr) => {
+    $.getScript("opentok-layout.min.js", () => {
+      // Initialize the layout container and get a reference to the layout method
+      layout = initLayoutContainer(layoutContainer, {
+        animate: {
+          duration: 500,
+          easing: "swing"
+        },
+        fixedRatio: true,
+        bigFixedRatio: false,
+        bigClass: "big"
+      }).layout;
+    });
+  });
+</script>
+</body>
+</html>
